@@ -1,21 +1,23 @@
 //
-//  PhotosCollectionViewController.swift
+//  PhotosViewController.swift
 //  PhotoCollection
 //
-//  Created by Md. Mahinur Rahman on 8/15/23.
+//  Created by Md. Mahinur Rahman on 8/17/23.
 //
 
 import UIKit
 import CoreData
 
-class PhotosViewController: UICollectionViewController {
+class PhotosViewController: UIViewController {
     
     var photos = [Photo]()
     let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
-    
+
+    @IBOutlet weak var imageView: UIImageView!
+    @IBOutlet weak var collectionView: UICollectionView!
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
         navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addNewPhoto))
         
         let gesture = UILongPressGestureRecognizer(target: self, action: #selector(handleLongPressGesture(_:)))
@@ -23,30 +25,24 @@ class PhotosViewController: UICollectionViewController {
         collectionView.addGestureRecognizer(gesture)
         
         loadPhotos()
+        collectionView.dataSource = self
+        collectionView.delegate = self
+        
+        setTopImage()
     }
     
-    //MARK: - Data source Method
-    override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return photos.count
-    }
-    
-    override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: K.photoCellIdentifier, for: indexPath) as? PhotoCell else{
-            fatalError("Unable to dequeue a Photo Cell")
+    //MARK: - Setting Top Image
+    func setTopImage(at index:Int=0){
+        if photos.count != 0{
+            let photo = photos[index]
+            if #available(iOS 16.0, *) {
+                let path = getDocumentsDirectory().appending(component: photo.id!)
+                imageView.image = UIImage(contentsOfFile: (path.path()))
+            } else {
+                let path = getDocumentsDirectory().appendingPathComponent(photo.id!)
+                imageView.image = UIImage(contentsOfFile: (path.path))
+            }
         }
-        
-        let photo = photos[indexPath.item]
-        if #available(iOS 16.0, *) {
-            let path = getDocumentsDirectory().appending(component: photo.id!)
-            cell.imageView.image = UIImage(contentsOfFile: (path.path()))
-        } else {
-            let path = getDocumentsDirectory().appendingPathComponent(photo.id!)
-            cell.imageView.image = UIImage(contentsOfFile: (path.path))
-        }
-        
-        cell.layer.cornerRadius = 20
-        
-        return cell
     }
     
     //MARK: - Drag and Drop feature
@@ -66,11 +62,11 @@ class PhotosViewController: UICollectionViewController {
         }
     }
     
-    override func collectionView(_ collectionView: UICollectionView, canMoveItemAt indexPath: IndexPath) -> Bool {
+    func collectionView(_ collectionView: UICollectionView, canMoveItemAt indexPath: IndexPath) -> Bool {
         return true
     }
     
-    override func collectionView(_ collectionView: UICollectionView, moveItemAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
+    func collectionView(_ collectionView: UICollectionView, moveItemAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
         let photo = photos.remove(at: sourceIndexPath.item)
         photos.insert(photo, at: destinationIndexPath.item)
         updateIndex()
@@ -110,6 +106,32 @@ class PhotosViewController: UICollectionViewController {
     }
 }
 
+//MARK: - Data source Method
+extension PhotosViewController: UICollectionViewDataSource{
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return photos.count
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: K.photoCellIdentifier, for: indexPath) as? PhotoCell else{
+            fatalError("Unable to dequeue a Photo Cell")
+        }
+        
+        let photo = photos[indexPath.item]
+        if #available(iOS 16.0, *) {
+            let path = getDocumentsDirectory().appending(component: photo.id!)
+            cell.imageView.image = UIImage(contentsOfFile: (path.path()))
+        } else {
+            let path = getDocumentsDirectory().appendingPathComponent(photo.id!)
+            cell.imageView.image = UIImage(contentsOfFile: (path.path))
+        }
+        
+        cell.layer.cornerRadius = 20
+        
+        return cell
+    }
+}
+
 //MARK: - Picker Funtionalities
 extension PhotosViewController: UINavigationControllerDelegate, UIImagePickerControllerDelegate{
     @objc func addNewPhoto(){
@@ -137,5 +159,12 @@ extension PhotosViewController: UINavigationControllerDelegate, UIImagePickerCon
         savePhotos()
         
         dismiss(animated: true)
+    }
+}
+
+//MARK: - Delegate Method
+extension PhotosViewController:UICollectionViewDelegate{
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        setTopImage(at: indexPath.item)
     }
 }
