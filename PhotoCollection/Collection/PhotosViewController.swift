@@ -164,7 +164,9 @@ extension PhotosViewController: UINavigationControllerDelegate, UIImagePickerCon
         photos.append(photo)
         savePhotos()
         
-        setTopImage()
+        if imageView.image == nil{
+            setTopImage()
+        }
         
         dismiss(animated: true)
     }
