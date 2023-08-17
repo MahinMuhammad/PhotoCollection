@@ -9,4 +9,6 @@ import Foundation
 
 struct K{
     static let persistentContainerTitle = "DataModel"
+    static let photoCellIdentifier = "PhotoCell"
+    static let indexTitle = "index"
 }
