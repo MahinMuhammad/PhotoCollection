@@ -18,9 +18,10 @@
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="image1" translatesAutoresizingMaskIntoConstraints="NO" id="Vms-sQ-13v">
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Vms-sQ-13v">
                                 <rect key="frame" x="0.0" y="0.0" width="393" height="248"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                             </imageView>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="eV9-2z-J3s">
                                 <rect key="frame" x="0.0" y="157" width="393" height="695"/>
@@ -68,9 +69,25 @@
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                             </collectionView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ua6-GA-Dh0">
+                                <rect key="frame" x="170" y="768" width="53" height="50"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="TjW-QZ-UDS"/>
+                                </constraints>
+                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                <state key="normal" image="add"/>
+                                <connections>
+                                    <action selector="addButtonPressed:" destination="QAk-Fm-ZP6" eventType="touchUpInside" id="TFm-Ip-5LS"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="pQe-yL-ET0"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="ua6-GA-Dh0" firstAttribute="bottom" secondItem="pQe-yL-ET0" secondAttribute="bottom" id="8af-rP-S1h"/>
+                            <constraint firstItem="pQe-yL-ET0" firstAttribute="trailing" secondItem="ua6-GA-Dh0" secondAttribute="trailing" constant="170" id="BEO-tH-7mW"/>
+                            <constraint firstItem="ua6-GA-Dh0" firstAttribute="leading" secondItem="pQe-yL-ET0" secondAttribute="leading" constant="170" id="w3A-Lz-IO2"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="Jgd-Qi-gA0"/>
                     <connections>
@@ -102,7 +119,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="image1" width="2002" height="2015"/>
+        <image name="add" width="170.66667175292969" height="170.66667175292969"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

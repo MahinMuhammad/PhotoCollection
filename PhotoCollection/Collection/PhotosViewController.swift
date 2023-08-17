@@ -18,7 +18,8 @@ class PhotosViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addNewPhoto))
+        //uncomment to use rightbar button to add picture
+//        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addNewPhoto))
         
         let gesture = UILongPressGestureRecognizer(target: self, action: #selector(handleLongPressGesture(_:)))
         
@@ -104,6 +105,11 @@ class PhotosViewController: UIViewController {
             print("Error while loading photos")
         }
     }
+    
+    //MARK: - Add button function
+    @IBAction func addButtonPressed(_ sender: UIButton) {
+        addNewPhoto()
+    }
 }
 
 //MARK: - Data source Method
@@ -157,6 +163,8 @@ extension PhotosViewController: UINavigationControllerDelegate, UIImagePickerCon
         photo.index = Int32(photos.count)
         photos.append(photo)
         savePhotos()
+        
+        setTopImage()
         
         dismiss(animated: true)
     }
