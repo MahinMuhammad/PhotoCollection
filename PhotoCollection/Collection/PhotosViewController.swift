@@ -36,8 +36,13 @@ class PhotosViewController: UICollectionViewController {
         }
         
         let photo = photos[indexPath.item]
-        let path = getDocumentsDirectory().appending(component: photo.id!)
-        cell.imageView.image = UIImage(contentsOfFile: (path.path()))
+        if #available(iOS 16.0, *) {
+            let path = getDocumentsDirectory().appending(component: photo.id!)
+            cell.imageView.image = UIImage(contentsOfFile: (path.path()))
+        } else {
+            let path = getDocumentsDirectory().appendingPathComponent(photo.id!)
+            cell.imageView.image = UIImage(contentsOfFile: (path.path))
+        }
         
         cell.layer.cornerRadius = 20
         
@@ -46,10 +51,6 @@ class PhotosViewController: UICollectionViewController {
     
     //MARK: - Drag and Drop feature
     @objc func handleLongPressGesture(_ gesture: UILongPressGestureRecognizer){
-        guard let collectionView = collectionView else{
-            return
-        }
-        
         switch gesture.state{
         case .began:
             guard let indexPath = collectionView.indexPathForItem(at: gesture.location(in: collectionView)) else{
