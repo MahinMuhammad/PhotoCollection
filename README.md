@@ -1,6 +1,13 @@
 <h1>PhotoCollection</h1>
   PhotoCollection is an iOS app built with UIKit. Here user can store images from the Photos app.
 
+<h3>Demo</h3>
+
+
+https://github.com/MahinMuhammad/PhotoCollection/assets/83515380/9d96a050-f68b-483f-b1f3-6e270eadcd15
+
+
+
 <h3>Graphical User Interface</h3>
   <table style="border:none">
     <tr>
