@@ -4,9 +4,9 @@
 <h3>Graphical User Interface</h3>
   <table style="border:none">
     <tr>
-        <td><img src="Documentation/NewsView.png" height="400"></td>
-        <td><img src="Documentation/SignInView.png" height="400"></td>
-        <td><img src="Documentation/MyProfileView.png" height="400"></td>
+        <td><img src="Documentation/one.png" height="400"></td>
+        <td><img src="Documentation/two.png" height="400"></td>
+        <td><img src="Documentation/three.png" height="400"></td>
      </tr>
   </table>
 
