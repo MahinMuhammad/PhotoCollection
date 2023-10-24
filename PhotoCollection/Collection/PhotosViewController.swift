@@ -13,13 +13,10 @@ class PhotosViewController: UIViewController {
     var photos = [Photo]()
     let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
 
-    @IBOutlet weak var imageView: UIImageView!
+    @IBOutlet weak var canvasImageView: UIImageView!
     @IBOutlet weak var collectionView: UICollectionView!
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        //uncomment to use rightbar button to add picture
-//        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addNewPhoto))
         
         let gesture = UILongPressGestureRecognizer(target: self, action: #selector(handleLongPressGesture(_:)))
         
@@ -38,10 +35,10 @@ class PhotosViewController: UIViewController {
             let photo = photos[index]
             if #available(iOS 16.0, *) {
                 let path = getDocumentsDirectory().appending(component: photo.id!)
-                imageView.image = UIImage(contentsOfFile: (path.path()))
+                canvasImageView.image = UIImage(contentsOfFile: (path.path()))
             } else {
                 let path = getDocumentsDirectory().appendingPathComponent(photo.id!)
-                imageView.image = UIImage(contentsOfFile: (path.path))
+                canvasImageView.image = UIImage(contentsOfFile: (path.path))
             }
         }
     }
@@ -133,6 +130,8 @@ extension PhotosViewController: UICollectionViewDataSource{
         }
         
         cell.layer.cornerRadius = 20
+        cell.layer.borderWidth = 1
+        cell.layer.borderColor = UIColor.lightGray.cgColor
         
         return cell
     }
@@ -164,7 +163,7 @@ extension PhotosViewController: UINavigationControllerDelegate, UIImagePickerCon
         photos.append(photo)
         savePhotos()
         
-        if imageView.image == nil{
+        if canvasImageView.image == nil{
             setTopImage()
         }
         
