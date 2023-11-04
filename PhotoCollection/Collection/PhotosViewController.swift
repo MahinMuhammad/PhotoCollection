@@ -11,8 +11,10 @@ import CoreData
 class PhotosViewController: UIViewController {
     
     var photos = [Photo]()
+    var selectedCell:IndexPath?
     let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
 
+    @IBOutlet weak var menuButton: UIButton!
     @IBOutlet weak var canvasImageView: UIImageView!
     @IBOutlet weak var collectionView: UICollectionView!
     override func viewDidLoad() {
@@ -26,6 +28,19 @@ class PhotosViewController: UIViewController {
         collectionView.dataSource = self
         collectionView.delegate = self
         
+        //context menu
+        let delete = UIAction(title: "Delete", image: UIImage(systemName: "trash"), attributes: .destructive) { _ in
+            if let indexpath =  self.selectedCell{
+                self.deletePhoto(of: indexpath)
+            }
+        }
+        let deleteAll = UIAction(title: "Delete All", image: UIImage(systemName: "trash.fill"), attributes: .destructive) { _ in
+            self.deleteAllPhotos()
+        }
+        menuButton.showsMenuAsPrimaryAction = true
+        menuButton.menu = UIMenu(children: [delete, deleteAll])
+        
+        //setting up the top canvas image as same as the selected image
         setTopImage()
     }
     
@@ -47,9 +62,7 @@ class PhotosViewController: UIViewController {
     @objc func handleLongPressGesture(_ gesture: UILongPressGestureRecognizer){
         switch gesture.state{
         case .began:
-            guard let indexPath = collectionView.indexPathForItem(at: gesture.location(in: collectionView)) else{
-                return
-            }
+            guard let indexPath = collectionView.indexPathForItem(at: gesture.location(in: collectionView)) else{return}
             collectionView.beginInteractiveMovementForItem(at: indexPath)
         case .changed:
             collectionView.updateInteractiveMovementTargetPosition(gesture.location(in: collectionView))
@@ -101,6 +114,26 @@ class PhotosViewController: UIViewController {
         }catch{
             print("Error while loading photos")
         }
+    }
+    
+    func deletePhoto(of indexpath:IndexPath){
+        for photo in photos {
+            if photo.index == indexpath.row{
+                context.delete(photo)
+            }
+        }
+        photos.removeAll { photo in
+            photo.index == indexpath.row
+        }
+        savePhotos()
+    }
+    
+    func deleteAllPhotos(){
+        for photo in photos {
+            context.delete(photo)
+        }
+        photos.removeAll()
+        savePhotos()
     }
     
     //MARK: - Add button function
@@ -175,5 +208,22 @@ extension PhotosViewController: UINavigationControllerDelegate, UIImagePickerCon
 extension PhotosViewController:UICollectionViewDelegate{
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         setTopImage(at: indexPath.item)
+        selectPhoto(selectedIndexpath: indexPath)
+    }
+
+    func selectPhoto(selectedIndexpath: IndexPath){
+        for item in collectionView.visibleCells{
+            let indexpath = collectionView.indexPath(for: item)
+            if selectedIndexpath == indexpath{
+                let cell = collectionView.cellForItem(at: selectedIndexpath)
+                cell?.layer.borderWidth = 3
+                cell?.layer.borderColor = UIColor.yellow.cgColor
+                selectedCell = selectedIndexpath
+            }else{
+                let cell = collectionView.cellForItem(at: indexpath!)
+                cell?.layer.borderWidth = 1
+                cell?.layer.borderColor = UIColor.lightGray.cgColor
+            }
+        }
     }
 }
