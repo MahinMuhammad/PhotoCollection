@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="22155" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="QAk-Fm-ZP6">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="22155" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="iI7-k0-1iI">
     <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
@@ -10,6 +10,11 @@
         <capability name="collection view cell content view" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
+    <customFonts key="customFonts">
+        <array key="TimesNewRoman.ttf">
+            <string>.SFUI-Regular</string>
+        </array>
+    </customFonts>
     <scenes>
         <!--Photos View Controller-->
         <scene sceneID="kz6-Gr-SmX">
@@ -84,6 +89,9 @@
                                         <state key="normal">
                                             <imageReference key="image" image="pencil.tip.crop.circle" catalog="system" symbolScale="large"/>
                                         </state>
+                                        <connections>
+                                            <action selector="editButtonPressed:" destination="QAk-Fm-ZP6" eventType="touchUpInside" id="V5e-bQ-8hc"/>
+                                        </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ua6-GA-Dh0" userLabel="AddButton">
                                         <rect key="frame" x="171" y="8" width="50" height="50"/>
@@ -135,13 +143,77 @@
                             <constraint firstItem="yNJ-Bu-att" firstAttribute="leading" secondItem="pQe-yL-ET0" secondAttribute="leading" id="hhX-7h-amc"/>
                         </constraints>
                     </view>
+                    <navigationItem key="navigationItem" id="13Y-MS-wlK"/>
                     <connections>
                         <outlet property="canvasImageView" destination="Vms-sQ-13v" id="cue-a5-6R9"/>
                         <outlet property="collectionView" destination="eV9-2z-J3s" id="N1f-nT-egu"/>
                         <outlet property="menuButton" destination="ltu-nb-NIY" id="ktX-7a-HeC"/>
+                        <segue destination="Rrd-tW-79R" kind="show" identifier="goToEditView" id="qRL-vB-skr"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ZOs-fU-HA0" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1579.3893129770993" y="-139.43661971830986"/>
+        </scene>
+        <!--PhotoEditView Controller-->
+        <scene sceneID="o83-8k-jH7">
+            <objects>
+                <viewController id="Rrd-tW-79R" userLabel="PhotoEditView Controller" customClass="PhotoEditViewController" customModule="PhotoCollection" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="lPN-FE-ybh">
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" translatesAutoresizingMaskIntoConstraints="NO" id="VI3-Fp-fDX">
+                                <rect key="frame" x="0.0" y="103" width="393" height="715"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Editor" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7rj-gG-Q3K">
+                                        <rect key="frame" x="0.0" y="0.0" width="393" height="37"/>
+                                        <fontDescription key="fontDescription" name=".SFUI-Regular" family=".AppleSystemUIFont" pointSize="34"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Q7o-LP-U6N">
+                                        <rect key="frame" x="0.0" y="37" width="393" height="678"/>
+                                    </imageView>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="7rj-gG-Q3K" secondAttribute="trailing" id="MKp-aD-Q0W"/>
+                                </constraints>
+                            </stackView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="jWM-nP-RLN"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="VI3-Fp-fDX" firstAttribute="top" secondItem="jWM-nP-RLN" secondAttribute="top" id="FO9-aV-OWR"/>
+                            <constraint firstItem="VI3-Fp-fDX" firstAttribute="leading" secondItem="jWM-nP-RLN" secondAttribute="leading" id="Xqh-9d-Izw"/>
+                            <constraint firstItem="jWM-nP-RLN" firstAttribute="bottom" secondItem="VI3-Fp-fDX" secondAttribute="bottom" id="bKh-8I-VGx"/>
+                            <constraint firstItem="jWM-nP-RLN" firstAttribute="trailing" secondItem="VI3-Fp-fDX" secondAttribute="trailing" id="e5N-iM-wOb"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="aHG-uN-owM"/>
+                    <connections>
+                        <outlet property="imageView" destination="Q7o-LP-U6N" id="8NP-lW-BHa"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ZFz-j8-x2o" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2520" y="-139"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="dJ5-73-dob">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="iI7-k0-1iI" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="Q2f-I7-ewn">
+                        <rect key="frame" x="0.0" y="59" width="393" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="QAk-Fm-ZP6" kind="relationship" relationship="rootViewController" id="OpT-Je-kgL"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="abL-j6-qfT" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="652.67175572519079" y="-139.43661971830986"/>
         </scene>

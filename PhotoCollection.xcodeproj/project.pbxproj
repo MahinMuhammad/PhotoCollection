@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0028C3972AF693F4006475C6 /* PhotoEditViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0028C3962AF693F4006475C6 /* PhotoEditViewController.swift */; };
 		0099AAA92A8BAD4C00803446 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0099AAA82A8BAD4C00803446 /* AppDelegate.swift */; };
 		0099AAAB2A8BAD4C00803446 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0099AAAA2A8BAD4C00803446 /* SceneDelegate.swift */; };
 		0099AAB02A8BAD4C00803446 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0099AAAE2A8BAD4C00803446 /* Main.storyboard */; };
@@ -19,6 +20,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0028C3962AF693F4006475C6 /* PhotoEditViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoEditViewController.swift; sourceTree = "<group>"; };
 		0099AAA52A8BAD4C00803446 /* PhotoCollection.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PhotoCollection.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0099AAA82A8BAD4C00803446 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		0099AAAA2A8BAD4C00803446 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -88,6 +90,7 @@
 			children = (
 				0099AAC62A8BC42200803446 /* PhotoCell.swift */,
 				00F0AC532A8E3BDF0023727A /* PhotosViewController.swift */,
+				0028C3962AF693F4006475C6 /* PhotoEditViewController.swift */,
 			);
 			path = Collection;
 			sourceTree = "<group>";
@@ -175,6 +178,7 @@
 				0099AAA92A8BAD4C00803446 /* AppDelegate.swift in Sources */,
 				00F0AC542A8E3BDF0023727A /* PhotosViewController.swift in Sources */,
 				0099AAB32A8BAD4C00803446 /* DataModel.xcdatamodeld in Sources */,
+				0028C3972AF693F4006475C6 /* PhotoEditViewController.swift in Sources */,
 				0099AAAB2A8BAD4C00803446 /* SceneDelegate.swift in Sources */,
 				0099AAC82A8BC42200803446 /* PhotoCell.swift in Sources */,
 			);

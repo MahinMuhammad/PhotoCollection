@@ -11,7 +11,7 @@ import CoreData
 class PhotosViewController: UIViewController {
     
     var photos = [Photo]()
-    var selectedCell:IndexPath?
+    var selectedPhoto:Photo?
     let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
 
     @IBOutlet weak var menuButton: UIButton!
@@ -30,8 +30,8 @@ class PhotosViewController: UIViewController {
         
         //context menu
         let delete = UIAction(title: "Delete", image: UIImage(systemName: "trash"), attributes: .destructive) { _ in
-            if let indexpath =  self.selectedCell{
-                self.deletePhoto(of: indexpath)
+            if let photo =  self.selectedPhoto{
+                self.deletePhoto(of: photo)
             }
         }
         let deleteAll = UIAction(title: "Delete All", image: UIImage(systemName: "trash.fill"), attributes: .destructive) { _ in
@@ -116,14 +116,10 @@ class PhotosViewController: UIViewController {
         }
     }
     
-    func deletePhoto(of indexpath:IndexPath){
-        for photo in photos {
-            if photo.index == indexpath.row{
-                context.delete(photo)
-            }
-        }
-        photos.removeAll { photo in
-            photo.index == indexpath.row
+    func deletePhoto(of photo:Photo){
+        context.delete(photo)
+        photos.removeAll { item in
+            item == photo
         }
         savePhotos()
     }
@@ -139,6 +135,22 @@ class PhotosViewController: UIViewController {
     //MARK: - Add button function
     @IBAction func addButtonPressed(_ sender: UIButton) {
         addNewPhoto()
+    }
+    
+    // MARK: - Navigation
+    @IBAction func editButtonPressed(_ sender: UIButton) {
+        if selectedPhoto != nil{
+            performSegue(withIdentifier: K.editSegueIdentifier, sender: self)
+        }else{
+            let alert = UIAlertController(title: "Warning", message: "Select a photo first", preferredStyle: UIAlertController.Style.alert)
+            alert.addAction(UIAlertAction(title: "Ok", style: UIAlertAction.Style.default, handler: nil))
+            self.present(alert, animated: true, completion: nil)
+        }
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        let destinationVC = segue.destination as! PhotoEditViewController
+        destinationVC.photo = selectedPhoto
     }
 }
 
@@ -218,7 +230,7 @@ extension PhotosViewController:UICollectionViewDelegate{
                 let cell = collectionView.cellForItem(at: selectedIndexpath)
                 cell?.layer.borderWidth = 3
                 cell?.layer.borderColor = UIColor.yellow.cgColor
-                selectedCell = selectedIndexpath
+                selectedPhoto = photos[selectedIndexpath.row]
             }else{
                 let cell = collectionView.cellForItem(at: indexpath!)
                 cell?.layer.borderWidth = 1
