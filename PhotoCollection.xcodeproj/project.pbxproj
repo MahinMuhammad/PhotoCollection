@@ -16,6 +16,7 @@
 		0099AAB82A8BAD4E00803446 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0099AAB62A8BAD4E00803446 /* LaunchScreen.storyboard */; };
 		0099AAC12A8BB0B800803446 /* K.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0099AAC02A8BB0B800803446 /* K.swift */; };
 		0099AAC82A8BC42200803446 /* PhotoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0099AAC62A8BC42200803446 /* PhotoCell.swift */; };
+		009C9D212AF80960002917CC /* FilterCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 009C9D202AF80960002917CC /* FilterCell.swift */; };
 		00F0AC542A8E3BDF0023727A /* PhotosViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00F0AC532A8E3BDF0023727A /* PhotosViewController.swift */; };
 /* End PBXBuildFile section */
 
@@ -31,6 +32,7 @@
 		0099AAB92A8BAD4E00803446 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		0099AAC02A8BB0B800803446 /* K.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = K.swift; sourceTree = "<group>"; };
 		0099AAC62A8BC42200803446 /* PhotoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoCell.swift; sourceTree = "<group>"; };
+		009C9D202AF80960002917CC /* FilterCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterCell.swift; sourceTree = "<group>"; };
 		00F0AC532A8E3BDF0023727A /* PhotosViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotosViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -89,6 +91,7 @@
 			isa = PBXGroup;
 			children = (
 				0099AAC62A8BC42200803446 /* PhotoCell.swift */,
+				009C9D202AF80960002917CC /* FilterCell.swift */,
 				00F0AC532A8E3BDF0023727A /* PhotosViewController.swift */,
 				0028C3962AF693F4006475C6 /* PhotoEditViewController.swift */,
 			);
@@ -175,6 +178,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				0099AAC12A8BB0B800803446 /* K.swift in Sources */,
+				009C9D212AF80960002917CC /* FilterCell.swift in Sources */,
 				0099AAA92A8BAD4C00803446 /* AppDelegate.swift in Sources */,
 				00F0AC542A8E3BDF0023727A /* PhotosViewController.swift in Sources */,
 				0099AAB32A8BAD4C00803446 /* DataModel.xcdatamodeld in Sources */,
