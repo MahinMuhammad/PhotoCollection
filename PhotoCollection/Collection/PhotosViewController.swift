@@ -117,6 +117,13 @@ class PhotosViewController: UIViewController {
     }
     
     func deletePhoto(of photo:Photo){
+        if let id = photo.id{
+            do{
+                try FileManager.default.removeItem(at: getDocumentsDirectory().appendingPathComponent(id))
+            }catch{
+                print("Error deleting photo: \(error)")
+            }
+        }
         context.delete(photo)
         photos.removeAll { item in
             item == photo
@@ -126,6 +133,13 @@ class PhotosViewController: UIViewController {
     
     func deleteAllPhotos(){
         for photo in photos {
+            if let id = photo.id{
+                do{
+                    try FileManager.default.removeItem(at: getDocumentsDirectory().appendingPathComponent(id))
+                }catch{
+                    print("Error deleting photo: \(error)")
+                }
+            }
             context.delete(photo)
         }
         photos.removeAll()
