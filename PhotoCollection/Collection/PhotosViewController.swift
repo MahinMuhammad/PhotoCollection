@@ -55,6 +55,8 @@ class PhotosViewController: UIViewController {
                 let path = getDocumentsDirectory().appendingPathComponent(photo.id!)
                 canvasImageView.image = UIImage(contentsOfFile: (path.path))
             }
+        }else{
+            canvasImageView.image = nil
         }
     }
     
@@ -129,6 +131,8 @@ class PhotosViewController: UIViewController {
             item == photo
         }
         savePhotos()
+        selectedPhoto = nil
+        setTopImage()
     }
     
     func deleteAllPhotos(){
@@ -144,6 +148,8 @@ class PhotosViewController: UIViewController {
         }
         photos.removeAll()
         savePhotos()
+        selectedPhoto = nil
+        setTopImage()
     }
     
     //MARK: - Add button function
