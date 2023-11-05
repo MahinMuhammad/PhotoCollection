@@ -34,6 +34,10 @@ class PhotoEditViewController: UIViewController {
         }
     }
     
+    @IBAction func donePressed(_ sender: UIButton) {
+        self.navigationController?.popViewController(animated: true)
+    }
+    
     //MARK: - Document Directory
     func getDocumentsDirectory() -> URL{
         let paths = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)

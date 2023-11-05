@@ -183,6 +183,9 @@
                                                 <state key="normal" title="Done">
                                                     <color key="titleColor" name="AccentColor"/>
                                                 </state>
+                                                <connections>
+                                                    <action selector="donePressed:" destination="Rrd-tW-79R" eventType="touchUpInside" id="t5Z-Rn-6hb"/>
+                                                </connections>
                                             </button>
                                         </subviews>
                                     </stackView>
