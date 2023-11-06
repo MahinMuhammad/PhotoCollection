@@ -7,15 +7,25 @@
 
 import UIKit
 import CoreImage
-import CoreImage.CIFilter
 
 class PhotoEditViewController: UIViewController {
     
-    let context = CIContext(options: nil) //Place to render the filtered image
-    let filterList = CIFilter.filterNames(inCategory: nil)
     var photo:Photo?
+    var fetchedImage:UIImage?
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var imageView: UIImageView!
+    
+    var context: CIContext!
+    var currentFilter: CIFilter?
+    let filterList = [
+        "CIBoxBlur",
+        "CISepiaTone",
+        "CIPhotoEffectMono",
+        "CIPhotoEffectProcess",
+        "CIPhotoEffectChrome",
+        "CIPhotoEffectFade",
+        "CIPhotoEffectTonal"
+    ]
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -25,15 +35,41 @@ class PhotoEditViewController: UIViewController {
         collectionView.dataSource = self
         collectionView.delegate = self
         
+        fetchedImage = fetchImageFromDocummentDirectory()
+        imageView.image = fetchImageFromDocummentDirectory()
+        
+        context = CIContext() //Place to render the filtered image
+        currentFilter = nil
+    }
+    
+    func fetchImageFromDocummentDirectory()->UIImage?{
         if let photo{
             if #available(iOS 16.0, *) {
                 let path = getDocumentsDirectory().appending(component: photo.id!)
-                imageView.image = UIImage(contentsOfFile: (path.path()))
+                return UIImage(contentsOfFile: (path.path()))
             } else {
                 let path = getDocumentsDirectory().appendingPathComponent(photo.id!)
-                imageView.image = UIImage(contentsOfFile: (path.path))
+                return UIImage(contentsOfFile: (path.path))
             }
         }
+        return nil
+    }
+    
+    func processImage(for index:IndexPath)->UIImage?{
+        let inputImage = CIImage(image: fetchedImage!)
+        if currentFilter != CIFilter(name: filterList[index.row]){
+            currentFilter = CIFilter(name: filterList[index.row])
+            if let currentFilter{
+                currentFilter.setValue(inputImage, forKey: kCIInputImageKey)
+                if let output = currentFilter.outputImage{
+                    if let cgimg = context.createCGImage(output, from: output.extent){
+                        let processedImage = UIImage(cgImage: cgimg)
+                        return processedImage
+                    }
+                }
+            }
+        }
+        return nil
     }
     
     @IBAction func donePressed(_ sender: UIButton) {
@@ -58,9 +94,9 @@ extension PhotoEditViewController:UICollectionViewDataSource{
             fatalError("Unable to dequeue a Photo Cell")
         }
         
-//        print(filterList[indexPath.row])
+        print(filterList[indexPath.row])
         
-        cell.imageView.image = UIImage(systemName: "square.and.arrow.up.fill")
+        cell.imageView.image = processImage(for: indexPath)
         
         return cell
     }
@@ -70,5 +106,7 @@ extension PhotoEditViewController:UICollectionViewDataSource{
 
 //MARK: - UICollectionViewDelegate
 extension PhotoEditViewController:UICollectionViewDelegate{
-    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        imageView.image = processImage(for: indexPath)
+    }
 }
