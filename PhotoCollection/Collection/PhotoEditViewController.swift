@@ -20,6 +20,8 @@ class PhotoEditViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        navigationController?.navigationBar.isHidden = true
+        
         collectionView.dataSource = self
         collectionView.delegate = self
         
@@ -55,6 +57,8 @@ extension PhotoEditViewController:UICollectionViewDataSource{
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: K.filterCellIdentifier, for: indexPath) as? FilterCell else{
             fatalError("Unable to dequeue a Photo Cell")
         }
+        
+//        print(filterList[indexPath.row])
         
         cell.imageView.image = UIImage(systemName: "square.and.arrow.up.fill")
         
