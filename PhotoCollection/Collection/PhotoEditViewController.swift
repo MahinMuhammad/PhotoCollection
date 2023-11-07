@@ -74,7 +74,8 @@ class PhotoEditViewController: UIViewController {
         return nil
     }
     
-    @IBAction func donePressed(_ sender: UIButton) {
+    @IBAction func savedPressed(_ sender: UIButton) {
+        updateImageToDocumentDirectory()
         self.navigationController?.popViewController(animated: true)
     }
     
@@ -82,6 +83,15 @@ class PhotoEditViewController: UIViewController {
     func getDocumentsDirectory() -> URL{
         let paths = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
         return paths[0]
+    }
+    
+    func updateImageToDocumentDirectory(){
+        if let id = photo?.id{
+            let imagePath = getDocumentsDirectory().appendingPathComponent(id)
+            if let jpegData = imageView.image?.jpegData(compressionQuality: 0.8){
+                try? jpegData.write(to: imagePath)
+            }
+        }
     }
 }
 

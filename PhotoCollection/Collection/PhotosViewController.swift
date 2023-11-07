@@ -44,6 +44,10 @@ class PhotosViewController: UIViewController {
         setTopImage()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        collectionView.reloadData()
+    }
+    
     //MARK: - Setting Top Image
     func setTopImage(at index:Int=0){
         if photos.count != 0{
