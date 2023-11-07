@@ -240,22 +240,6 @@ extension PhotosViewController: UINavigationControllerDelegate, UIImagePickerCon
 extension PhotosViewController:UICollectionViewDelegate{
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         setTopImage(at: indexPath.item)
-        selectPhoto(selectedIndexpath: indexPath)
-    }
-
-    func selectPhoto(selectedIndexpath: IndexPath){
-        for item in collectionView.visibleCells{
-            let indexpath = collectionView.indexPath(for: item)
-            if selectedIndexpath == indexpath{
-                let cell = collectionView.cellForItem(at: selectedIndexpath)
-                cell?.layer.borderWidth = 3
-                cell?.layer.borderColor = UIColor.yellow.cgColor
-                selectedPhoto = photos[selectedIndexpath.row]
-            }else{
-                let cell = collectionView.cellForItem(at: indexpath!)
-                cell?.layer.borderWidth = 1
-                cell?.layer.borderColor = UIColor.lightGray.cgColor
-            }
-        }
+        selectedPhoto = photos[indexPath.item]
     }
 }

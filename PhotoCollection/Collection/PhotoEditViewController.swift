@@ -17,15 +17,15 @@ class PhotoEditViewController: UIViewController {
     
     var context: CIContext!
     var currentFilter: CIFilter?
-    let filterList = [
-        "Original",
-        "CIBoxBlur",
-        "CISepiaTone",
-        "CIPhotoEffectMono",
-        "CIPhotoEffectProcess",
-        "CIPhotoEffectChrome",
-        "CIPhotoEffectFade",
-        "CIPhotoEffectTonal"
+    let filterList:[CIFilter?] = [
+        nil,
+        CIFilter(name: "CIBoxBlur"),
+        CIFilter(name: "CISepiaTone"),
+        CIFilter(name: "CIPhotoEffectMono"),
+        CIFilter(name: "CIPhotoEffectProcess"),
+        CIFilter(name: "CIPhotoEffectChrome"),
+        CIFilter(name: "CIPhotoEffectFade"),
+        CIFilter(name: "CIPhotoEffectTonal")
     ]
     
     override func viewDidLoad() {
@@ -57,10 +57,10 @@ class PhotoEditViewController: UIViewController {
     }
     
     func processImage(for index:IndexPath)->UIImage?{
-        if filterList[index.row] == "Original" {return fetchedImage}
+        if filterList[index.row] == nil {return fetchedImage}
         let inputImage = CIImage(image: fetchedImage!)
-        if currentFilter != CIFilter(name: filterList[index.row]){
-            currentFilter = CIFilter(name: filterList[index.row])
+        if currentFilter != filterList[index.row]{
+            currentFilter = filterList[index.row]
             if let currentFilter{
                 currentFilter.setValue(inputImage, forKey: kCIInputImageKey)
                 if let output = currentFilter.outputImage{
@@ -96,7 +96,8 @@ extension PhotoEditViewController:UICollectionViewDataSource{
             fatalError("Unable to dequeue a Photo Cell")
         }
         
-        print(filterList[indexPath.row])
+        cell.layer.borderWidth = 1
+        cell.layer.borderColor = UIColor.lightGray.cgColor
         
         cell.imageView.image = processImage(for: indexPath)
         
