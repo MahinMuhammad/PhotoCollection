@@ -57,21 +57,18 @@ class PhotoEditViewController: UIViewController {
     }
     
     func processImage(for index:IndexPath)->UIImage?{
-        if filterList[index.row] == nil {return fetchedImage}
-        let inputImage = CIImage(image: fetchedImage!)
-        if currentFilter != filterList[index.row]{
-            currentFilter = filterList[index.row]
-            if let currentFilter{
-                currentFilter.setValue(inputImage, forKey: kCIInputImageKey)
-                if let output = currentFilter.outputImage{
-                    if let cgimg = context.createCGImage(output, from: output.extent){
-                        let processedImage = UIImage(cgImage: cgimg)
-                        return processedImage
-                    }
+        currentFilter = filterList[index.row]
+        if let currentFilter{
+            let inputImage = CIImage(image: fetchedImage!)
+            currentFilter.setValue(inputImage, forKey: kCIInputImageKey)
+            if let output = currentFilter.outputImage{
+                if let cgimg = context.createCGImage(output, from: output.extent){
+                    let processedImage = UIImage(cgImage: cgimg)
+                    return processedImage
                 }
             }
         }
-        return nil
+        return fetchedImage //filter nil returns original image
     }
     
     @IBAction func savedPressed(_ sender: UIButton) {
@@ -120,6 +117,8 @@ extension PhotoEditViewController:UICollectionViewDataSource{
 //MARK: - UICollectionViewDelegate
 extension PhotoEditViewController:UICollectionViewDelegate{
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        imageView.image = processImage(for: indexPath)
+        if currentFilter != filterList[indexPath.row]{ //same filter must be used once
+            imageView.image = processImage(for: indexPath)
+        }
     }
 }
