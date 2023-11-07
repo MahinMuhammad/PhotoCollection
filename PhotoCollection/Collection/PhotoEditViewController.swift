@@ -18,6 +18,7 @@ class PhotoEditViewController: UIViewController {
     var context: CIContext!
     var currentFilter: CIFilter?
     let filterList = [
+        "Original",
         "CIBoxBlur",
         "CISepiaTone",
         "CIPhotoEffectMono",
@@ -56,6 +57,7 @@ class PhotoEditViewController: UIViewController {
     }
     
     func processImage(for index:IndexPath)->UIImage?{
+        if filterList[index.row] == "Original" {return fetchedImage}
         let inputImage = CIImage(image: fetchedImage!)
         if currentFilter != CIFilter(name: filterList[index.row]){
             currentFilter = CIFilter(name: filterList[index.row])
