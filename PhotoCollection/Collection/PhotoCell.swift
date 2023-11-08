@@ -27,6 +27,13 @@ class PhotoCell: UICollectionViewCell {
 
     @IBOutlet weak var imageView: UIImageView!
     
+    required init?(coder: NSCoder) {
+        super.init(coder: coder)
+        self.layer.cornerRadius = 20
+        self.layer.borderWidth = 1
+        self.layer.borderColor = UIColor.lightGray.cgColor
+    }
+    
     override var isSelected: Bool {
        didSet{
            if self.isSelected {

@@ -33,8 +33,7 @@ class FilterCell: UICollectionViewCell {
                self.layer.borderColor = UIColor.yellow.cgColor
            }
            else {
-               self.layer.borderWidth = 1
-               self.layer.borderColor = UIColor.lightGray.cgColor
+               self.layer.borderWidth = 0
            }
        }
    }

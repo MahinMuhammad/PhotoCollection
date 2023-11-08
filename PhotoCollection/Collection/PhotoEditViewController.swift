@@ -119,9 +119,6 @@ extension PhotoEditViewController:UICollectionViewDataSource{
             fatalError("Unable to dequeue a Photo Cell")
         }
         
-        cell.layer.borderWidth = 1
-        cell.layer.borderColor = UIColor.lightGray.cgColor
-        
         cell.imageView.image = processImage(for: indexPath)
         
         return cell

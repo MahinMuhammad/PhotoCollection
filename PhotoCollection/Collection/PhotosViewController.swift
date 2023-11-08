@@ -61,7 +61,13 @@ class PhotosViewController: UIViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
+        reloadCollectionViewCell()
+    }
+    
+    func reloadCollectionViewCell(){
+        let indexPath = self.collectionView.indexPathsForSelectedItems?.last ?? IndexPath(item: 0, section: 0)
         collectionView.reloadData()
+        collectionView.selectItem(at: indexPath, animated: false, scrollPosition: UICollectionView.ScrollPosition.centeredHorizontally)
     }
     
     //MARK: - Setting Top Image
@@ -122,7 +128,7 @@ class PhotosViewController: UIViewController {
     func savePhotos(){
         do{
             try context.save()
-            self.collectionView.reloadData()
+            self.reloadCollectionViewCell()
         }catch{
             print(error)
         }
@@ -213,10 +219,6 @@ extension PhotosViewController: UICollectionViewDataSource{
             let path = getDocumentsDirectory().appendingPathComponent(photo.id!)
             cell.imageView.image = UIImage(contentsOfFile: (path.path))
         }
-        
-        cell.layer.cornerRadius = 20
-        cell.layer.borderWidth = 1
-        cell.layer.borderColor = UIColor.lightGray.cgColor
         
         return cell
     }
