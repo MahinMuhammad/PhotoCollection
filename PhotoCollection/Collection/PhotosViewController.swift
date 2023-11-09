@@ -27,7 +27,6 @@ import CoreData
 class PhotosViewController: UIViewController {
     
     var photos = [Photo]()
-    var selectedPhoto:Photo?
     let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
 
     @IBOutlet weak var menuButton: UIButton!
@@ -46,7 +45,8 @@ class PhotosViewController: UIViewController {
         
         //context menu
         let delete = UIAction(title: "Delete", image: UIImage(systemName: "trash"), attributes: .destructive) { _ in
-            if let photo =  self.selectedPhoto{
+            if let indexPath =  self.collectionView.indexPathsForSelectedItems?.last{
+                let photo = self.photos[indexPath.row]
                 self.deletePhoto(of: photo)
             }
         }
@@ -61,13 +61,7 @@ class PhotosViewController: UIViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        reloadCollectionViewCell()
-    }
-    
-    func reloadCollectionViewCell(){
-        let indexPath = self.collectionView.indexPathsForSelectedItems?.last ?? IndexPath(item: 0, section: 0)
         collectionView.reloadData()
-        collectionView.selectItem(at: indexPath, animated: false, scrollPosition: UICollectionView.ScrollPosition.centeredHorizontally)
     }
     
     //MARK: - Setting Top Image
@@ -128,7 +122,7 @@ class PhotosViewController: UIViewController {
     func savePhotos(){
         do{
             try context.save()
-            self.reloadCollectionViewCell()
+            collectionView.reloadData()
         }catch{
             print(error)
         }
@@ -157,8 +151,8 @@ class PhotosViewController: UIViewController {
             item == photo
         }
         savePhotos()
-        selectedPhoto = nil
         setTopImage()
+        collectionView.reloadData()
     }
     
     func deleteAllPhotos(){
@@ -174,8 +168,8 @@ class PhotosViewController: UIViewController {
         }
         photos.removeAll()
         savePhotos()
-        selectedPhoto = nil
         setTopImage()
+        collectionView.reloadData()
     }
     
     //MARK: - Add button function
@@ -185,7 +179,7 @@ class PhotosViewController: UIViewController {
     
     // MARK: - Navigation
     @IBAction func editButtonPressed(_ sender: UIButton) {
-        if selectedPhoto != nil{
+        if collectionView.indexPathsForSelectedItems?.count != 0{
             performSegue(withIdentifier: K.editSegueIdentifier, sender: self)
         }else{
             let alert = UIAlertController(title: "Warning", message: "Select a photo first", preferredStyle: UIAlertController.Style.alert)
@@ -195,8 +189,9 @@ class PhotosViewController: UIViewController {
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        let indexPath = collectionView.indexPathsForSelectedItems?.last
         let destinationVC = segue.destination as! PhotoEditViewController
-        destinationVC.photo = selectedPhoto
+        destinationVC.photo = photos[indexPath!.row]
     }
 }
 
@@ -262,6 +257,6 @@ extension PhotosViewController: UINavigationControllerDelegate, UIImagePickerCon
 extension PhotosViewController:UICollectionViewDelegate{
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         setTopImage(at: indexPath.item)
-        selectedPhoto = photos[indexPath.item]
+//        selectedPhoto = photos[indexPath.item]
     }
 }
