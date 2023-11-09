@@ -15,6 +15,10 @@
 <h1>PhotoPage</h1>
   PhotoPage is an iOS app built with UIKit. Here user can store, Edit images from the Photos app.
 
+  (The project name is change recently but the project repo name kept same as before)
+
+  If you like this app, please do not forget to star ★ this repository and follow me on GitHub.
+
 <h3>Demo</h3>
 
 
