@@ -22,7 +22,7 @@
 
 /* Begin PBXFileReference section */
 		0028C3962AF693F4006475C6 /* PhotoEditViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoEditViewController.swift; sourceTree = "<group>"; };
-		0099AAA52A8BAD4C00803446 /* PhotoCollection.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PhotoCollection.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		0099AAA52A8BAD4C00803446 /* PhotoPage.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PhotoPage.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0099AAA82A8BAD4C00803446 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		0099AAAA2A8BAD4C00803446 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		0099AAAF2A8BAD4C00803446 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -50,7 +50,7 @@
 		0099AA9C2A8BAD4C00803446 = {
 			isa = PBXGroup;
 			children = (
-				0099AAA72A8BAD4C00803446 /* PhotoCollection */,
+				0099AAA72A8BAD4C00803446 /* PhotoPage */,
 				0099AAB42A8BAD4E00803446 /* Assets.xcassets */,
 				0099AAA62A8BAD4C00803446 /* Products */,
 			);
@@ -59,12 +59,12 @@
 		0099AAA62A8BAD4C00803446 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				0099AAA52A8BAD4C00803446 /* PhotoCollection.app */,
+				0099AAA52A8BAD4C00803446 /* PhotoPage.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		0099AAA72A8BAD4C00803446 /* PhotoCollection */ = {
+		0099AAA72A8BAD4C00803446 /* PhotoPage */ = {
 			isa = PBXGroup;
 			children = (
 				0099AAC02A8BB0B800803446 /* K.swift */,
@@ -76,7 +76,7 @@
 				0099AAC52A8BBC3300803446 /* View */,
 				0099AAC42A8BBC1D00803446 /* Collection */,
 			);
-			path = PhotoCollection;
+			path = PhotoPage;
 			sourceTree = "<group>";
 		};
 		0099AABF2A8BAFAB00803446 /* Model */ = {
@@ -109,9 +109,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		0099AAA42A8BAD4C00803446 /* PhotoCollection */ = {
+		0099AAA42A8BAD4C00803446 /* PhotoPage */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 0099AABC2A8BAD4E00803446 /* Build configuration list for PBXNativeTarget "PhotoCollection" */;
+			buildConfigurationList = 0099AABC2A8BAD4E00803446 /* Build configuration list for PBXNativeTarget "PhotoPage" */;
 			buildPhases = (
 				0099AAA12A8BAD4C00803446 /* Sources */,
 				0099AAA22A8BAD4C00803446 /* Frameworks */,
@@ -121,9 +121,9 @@
 			);
 			dependencies = (
 			);
-			name = PhotoCollection;
+			name = PhotoPage;
 			productName = PhotoCollection;
-			productReference = 0099AAA52A8BAD4C00803446 /* PhotoCollection.app */;
+			productReference = 0099AAA52A8BAD4C00803446 /* PhotoPage.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -134,14 +134,14 @@
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
 				LastSwiftUpdateCheck = 1430;
-				LastUpgradeCheck = 1430;
+				LastUpgradeCheck = 1500;
 				TargetAttributes = {
 					0099AAA42A8BAD4C00803446 = {
 						CreatedOnToolsVersion = 14.3.1;
 					};
 				};
 			};
-			buildConfigurationList = 0099AAA02A8BAD4C00803446 /* Build configuration list for PBXProject "PhotoCollection" */;
+			buildConfigurationList = 0099AAA02A8BAD4C00803446 /* Build configuration list for PBXProject "PhotoPage" */;
 			compatibilityVersion = "Xcode 14.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -154,7 +154,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				0099AAA42A8BAD4C00803446 /* PhotoCollection */,
+				0099AAA42A8BAD4C00803446 /* PhotoPage */,
 			);
 		};
 /* End PBXProject section */
@@ -246,6 +246,7 @@
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -264,6 +265,7 @@
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_NAME = PhotoPage;
 				SDKROOT = iphoneos;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -306,6 +308,7 @@
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
@@ -317,6 +320,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
+				PRODUCT_NAME = PhotoPage;
 				SDKROOT = iphoneos;
 				SWIFT_COMPILATION_MODE = wholemodule;
 				SWIFT_OPTIMIZATION_LEVEL = "-O";
@@ -333,7 +337,8 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = JTC82K5425;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = PhotoCollection/Info.plist;
+				INFOPLIST_FILE = PhotoPage/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = PhotoPage;
 				INFOPLIST_KEY_NSPhotoLibraryAddUsageDescription = "If you want to save the edited image to the photos library";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
@@ -346,11 +351,14 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.mahin.PhotoCollection;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_BUNDLE_IDENTIFIER = com.mahin.PhotoPage;
+				PRODUCT_NAME = "${TARGET_NAME}";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -363,7 +371,8 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = JTC82K5425;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = PhotoCollection/Info.plist;
+				INFOPLIST_FILE = PhotoPage/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = PhotoPage;
 				INFOPLIST_KEY_NSPhotoLibraryAddUsageDescription = "If you want to save the edited image to the photos library";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
@@ -376,18 +385,21 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.mahin.PhotoCollection;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_BUNDLE_IDENTIFIER = com.mahin.PhotoPage;
+				PRODUCT_NAME = "${TARGET_NAME}";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		0099AAA02A8BAD4C00803446 /* Build configuration list for PBXProject "PhotoCollection" */ = {
+		0099AAA02A8BAD4C00803446 /* Build configuration list for PBXProject "PhotoPage" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				0099AABA2A8BAD4E00803446 /* Debug */,
@@ -396,7 +408,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		0099AABC2A8BAD4E00803446 /* Build configuration list for PBXNativeTarget "PhotoCollection" */ = {
+		0099AABC2A8BAD4E00803446 /* Build configuration list for PBXNativeTarget "PhotoPage" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				0099AABD2A8BAD4E00803446 /* Debug */,

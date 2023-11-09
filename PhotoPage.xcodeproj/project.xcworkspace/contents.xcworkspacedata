@@ -2,6 +2,6 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "self:">
+      location = "self:/Users/md.mahinurrahman/Workshop/Swift/PhotoCollection/PhotoPage.xcodeproj">
    </FileRef>
 </Workspace>
