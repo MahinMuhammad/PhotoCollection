@@ -334,6 +334,7 @@
 				DEVELOPMENT_TEAM = JTC82K5425;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = PhotoCollection/Info.plist;
+				INFOPLIST_KEY_NSPhotoLibraryAddUsageDescription = "If you want to save the edited image to the photos library";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
@@ -363,6 +364,7 @@
 				DEVELOPMENT_TEAM = JTC82K5425;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = PhotoCollection/Info.plist;
+				INFOPLIST_KEY_NSPhotoLibraryAddUsageDescription = "If you want to save the edited image to the photos library";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;

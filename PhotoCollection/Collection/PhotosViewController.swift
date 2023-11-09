@@ -44,7 +44,15 @@ class PhotosViewController: UIViewController {
         collectionView.delegate = self
         
         //context menu
-        let delete = UIAction(title: "Delete", image: UIImage(systemName: "trash"), attributes: .destructive) { _ in
+        let saveToPhotosLibrary = UIAction(title: "Save To Photos", image: UIImage(systemName: "square.and.arrow.down.on.square")) { _ in
+            if let indexPath =  self.collectionView.indexPathsForSelectedItems?.last{
+//                let photo = self.photos[indexPath.row]
+                guard let cell = self.collectionView.cellForItem(at: indexPath) as? PhotoCell else{return}
+                guard let image = cell.imageView.image else{return}
+                UIImageWriteToSavedPhotosAlbum(image, self, #selector(self.image(_:didFinishSavingWithError:contextInfo:)), nil)
+            }
+        }
+        let delete = UIAction(title: "Delete", image: UIImage(systemName: "trash")) { _ in
             if let indexPath =  self.collectionView.indexPathsForSelectedItems?.last{
                 let photo = self.photos[indexPath.row]
                 self.deletePhoto(of: photo)
@@ -54,7 +62,7 @@ class PhotosViewController: UIViewController {
             self.deleteAllPhotos()
         }
         menuButton.showsMenuAsPrimaryAction = true
-        menuButton.menu = UIMenu(children: [delete, deleteAll])
+        menuButton.menu = UIMenu(children: [saveToPhotosLibrary, delete, deleteAll])
         
         //setting up the top canvas image as same as the selected image
         setTopImage()
@@ -62,6 +70,20 @@ class PhotosViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         collectionView.reloadData()
+    }
+    
+    //this function gets called after saving image to the photos app is done
+    @objc func image(_ image: UIImage, didFinishSavingWithError error: Error?, contextInfo: UnsafeRawPointer) {
+        if let error = error {
+            // we got back an error!
+            let ac = UIAlertController(title: "Save error", message: error.localizedDescription, preferredStyle: .alert)
+            ac.addAction(UIAlertAction(title: "OK", style: .default))
+            present(ac, animated: true)
+        } else {
+            let ac = UIAlertController(title: "Saved!", message: "Image has been saved to Photos App", preferredStyle: .alert)
+            ac.addAction(UIAlertAction(title: "OK", style: .default))
+            present(ac, animated: true)
+        }
     }
     
     //MARK: - Setting Top Image
